@@ -1,3 +1,4 @@
-# counter
+# moon_temperature
 
-this repo demonstrates how to make a simple counter with html and javascript
+This repo models the temperature on the moon increases in the future.
+

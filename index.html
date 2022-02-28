@@ -2,26 +2,62 @@
 <html>
 <body>
 
-<h1>JD's Counter</h1>
-
-<p id="counter"></p>
+<p id="time"></p>
+<p id="temp"></p>
+<p id="distance"></p>
 
 
 <script>
-setInterval(myCounter, 100);
-var i = 200
-document.getElementById("counter").style.color = "blue";
-document.getElementById("counter").style.fontSize = "200px";
+setInterval(myCounter, 25);
+var x = 0
+var y = 0
+var z = 0
+document.getElementsByTagName('body')[0].style.backgroundColor = "black";
+document.getElementById("time").style.color = "white";
+document.getElementById("time").style.fontSize = "200px";
+document.getElementById("temp").style.color = "white";
+document.getElementById("temp").style.fontSize = "200px";
+document.getElementById("distance").style.color = "white";
+document.getElementById("distance").style.fontSize = "200px";
+
+
 function myCounter() {
-  i -= 1;
-  if (i < 100) {
-    document.getElementById("counter").style.color = "red";
-  } 
-  if (i < 0) {
-    document.getElementById("counter").innerHTML = 0;
+  x += 1;
+  if (x > 8000) {
+    x = 8000;
+    y = -273.15;
+    z = 0;
   } else {
-    document.getElementById("counter").innerHTML = i;
-  }
+	// calculate temp
+          //moon temp      
+	if (x >= 00 && x <= 7000){
+          y = 0.0166554*x- 61.0625
+       } else if ( x >= 7000 && x <= 7800){
+          y = 0.65*x- 4470
+       } else if ( x >= 7800 && x <= 7900){
+          y = 9*x- 69600
+       } else if ( x >= 7900 && x <= 7950){
+          y = -18*x + 143700
+       } else if ( x >= 7950 && x <= 7990){
+          y = 22.5*x -178275
+       } else if ( x >= 7990 && x <= 8001){
+          y = 161.195*x + 1.2895 * Math.pow(10,6);
+       }
+       
+
+
+
+	// calculate distance
+	if (x >= 0 && x <= 7800){
+	  z = 15.6736 * x + 239260;
+	} else if ( x > 7800 && x <= 8000 ){
+	  z = -2400*x + 1.908 * Math.pow(10,7);
+	}
+
+    } 
+  document.getElementById("time").innerHTML = x;
+  document.getElementById("temp").innerHTML = y.toFixed(2);
+  document.getElementById("distance").innerHTML = Math.round(z);
 }
 
 </script>
